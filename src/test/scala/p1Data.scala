@@ -15,14 +15,14 @@ object p1Data {
       .getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     spark.conf.set("hive.exec.dynamic.partition.mode","nonstrict")
-    //createDatabase(spark)
-    //scenerio1(spark)
-    //scenerio2(spark)
-    //scenerio3(spark)
-    //scenerio4(spark)
-    //scenerio5(spark)
-    //scenerio6(spark)
-    //finding1(spark)
+    createDatabase(spark)
+    scenerio1(spark)
+    scenerio2(spark)
+    scenerio3(spark)
+    scenerio4(spark)
+    scenerio5(spark)
+    scenerio6(spark)
+    finding1(spark)
     finding2(spark)
   }
   def createDatabase(spark: SparkSession): Unit = {
@@ -48,7 +48,7 @@ object p1Data {
     spark.sql("DROP TABLE IF EXISTS bev_branch")
     spark.sql("CREATE TABLE bev_branch (beverage STRING) PARTITIONED BY ( branch STRING)")
     spark.sql("FROM bev_branches INSERT OVERWRITE TABLE bev_branch PARTITION(branch) SELECT * DISTRIBUTE BY branch")
-    spark.sql("CREATE VIEW B1081 As Select distinct beverage from bev_branch where branch ='Branch10' or branch='Branch8' or branch='Branch1'")
+    //spark.sql("CREATE VIEW B1081 As Select distinct beverage from bev_branch where branch ='Branch10' or branch='Branch8' or branch='Branch1'")
     spark.sql("SELECT * FROM B1081").show()
   }
   def scenerio5(spark: SparkSession): Unit = {
